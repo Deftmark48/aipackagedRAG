@@ -47,9 +47,13 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - OLLAMA_BASE_URL=http://172.17.0.1:11434      
+      - OLLAMA_BASE_URL=http://172.17.0.1:11434    
+      - VECTOR_DB=qdrant
+      - QDRANT_URI=http://qdrant:6333
     volumes:
       - open-webui:/app/backend/data
+    depends_on:
+      - qdrant
 
   # =====================
   #  POSTGRES
@@ -124,5 +128,6 @@ services:
       - qdrant_storage:/qdrant/storage
 
   
+
 
 
